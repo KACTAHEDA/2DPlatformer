@@ -5,6 +5,7 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;
     [SerializeField] private List<Point> _spawnPoints;
+    [SerializeField] private CoinColector _coinColector;
 
     private void Awake()
     {
@@ -15,7 +16,13 @@ public class CoinSpawner : MonoBehaviour
     {
         foreach (var point in _spawnPoints)
         {
-            Instantiate(_coinPrefab, point.transform.position, Quaternion.identity);
+            var coin = Instantiate(_coinPrefab, point.transform.position, Quaternion.identity);
+            coin.Collected += DestroyCoin;
         }
+    }
+
+    private void DestroyCoin(Coin coin)
+    {
+        Destroy(coin.gameObject);
     }
 }
