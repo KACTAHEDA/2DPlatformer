@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class Door : MonoBehaviour
+
+public class Finisher : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _levelCompleteText;
 
@@ -27,6 +28,6 @@ public class Door : MonoBehaviour
     {
         _isPased = true;
         Time.timeScale = 0;
-        _levelCompleteText.gameObject.SetActive(true);       
+        _levelCompleteText.gameObject.SetActive(true);
     }
 }
