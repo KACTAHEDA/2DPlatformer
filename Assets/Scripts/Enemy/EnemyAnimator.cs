@@ -2,19 +2,12 @@ using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-    private readonly int _stateHash = Animator.StringToHash("State");
+    private int _isMoveingHash = Animator.StringToHash("IsMoveing");
 
     [SerializeField] private Animator _animator;
-    [SerializeField] private EnemyPatrol _patrol;
 
-    private void Update()
+    public void Animate(bool isWalk)
     {
-        Animate();
-    }
-
-    private void Animate()
-    {
-        int state = _patrol.IsMoving ? 1 : 0;
-        _animator.SetInteger(_stateHash, state);
+        _animator.SetBool(_isMoveingHash , isWalk);
     }
 }

@@ -5,7 +5,6 @@ public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;
     [SerializeField] private List<Point> _spawnPoints;
-    [SerializeField] private CoinColector _coinColector;
 
     private void Awake()
     {
@@ -23,6 +22,7 @@ public class CoinSpawner : MonoBehaviour
 
     private void DestroyCoin(Coin coin)
     {
+        coin.Collected -= DestroyCoin;
         Destroy(coin.gameObject);
     }
 }

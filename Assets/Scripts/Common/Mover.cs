@@ -5,17 +5,24 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     [SerializeField] private float _speed = 5f;
+    [SerializeField] private float _jumpForce = 7f;
 
     protected Rigidbody2D Rigidbody;
 
-    protected virtual void Awake()
+    private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    public void Move(float move)
-    {      
-        Rigidbody.velocity = new Vector2(move * _speed, Rigidbody.velocity.y);
+    public void Jump()
+    {
+        Rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+    }
+
+    public void Move(float userInput)
+    {
+        float direction = Mathf.Asin(userInput);
+        Rigidbody.velocity = new Vector2(direction * _speed, Rigidbody.velocity.y);
     }
 
     public void MoveToPoint(Transform target)

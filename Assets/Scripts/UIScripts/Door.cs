@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class CompleteLevel : MonoBehaviour
+public class Door : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _levelCompleteText;
 

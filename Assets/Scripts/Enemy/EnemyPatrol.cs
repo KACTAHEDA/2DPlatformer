@@ -4,37 +4,27 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] private List<Point> _points;
-    [SerializeField] private Mover _mover;
-    [SerializeField] private FlipSprite _flip;
 
-    private int _curenPointtIndex = 0;
+    private int _curenPointtIndex;
+    private float _minDistanceToPoint = 0.2f;
 
-    public bool IsMoving { get; private set; }
+    public bool IsMoveing { get; private set; }
+    public Transform TargetPoint => _points[_curenPointtIndex].transform;
+    public bool IsTargetReached => transform.position.IsEnoughClose(TargetPoint.position, _minDistanceToPoint);
 
-    private void Update()
+    public void Patrol()
     {
-        Patrol();
-    }
-
-    private void Patrol()
-    {
-        Transform targetPoint = _points[_curenPointtIndex].transform;
         int minPointsToMove = 2;
-        float minDistanceToPoint = 0.1f;
 
         if (_points.Count < minPointsToMove)
         {
-            IsMoving = false;
+            IsMoveing = false;
             return;
         }
 
-        IsMoving = true;
-        _mover.MoveToPoint(targetPoint);
-        _flip.FlipTo(targetPoint.position);
 
-        bool isTargetReached = transform.position.IsEnoughClose(targetPoint.position, minDistanceToPoint);
 
-        if (isTargetReached == true)
+        if (IsTargetReached == true)
         {
             int nextPointIndex = ++_curenPointtIndex % _points.Count;
             _curenPointtIndex = nextPointIndex;

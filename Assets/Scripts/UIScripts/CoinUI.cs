@@ -4,7 +4,7 @@ using TMPro;
 public class CoinUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _coinText;
-    [SerializeField] private CoinColector _coinColector;
+    [SerializeField] private Wallet _wallet;
 
     private void Update()
     {
@@ -13,6 +13,6 @@ public class CoinUI : MonoBehaviour
 
     private void DisplayCoinsCount()
     {
-        _coinText.text = _coinColector.Coins.ToString();
+        _coinText.text = _wallet.Coins.ToString();
     }
 }

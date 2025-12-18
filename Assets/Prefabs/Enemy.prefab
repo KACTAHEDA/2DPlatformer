@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1527890533679856774}
   - component: {fileID: 311325539507535573}
-  - component: {fileID: 799661192698131767}
   - component: {fileID: 2832380244043652153}
   - component: {fileID: 533384918100372823}
+  - component: {fileID: 799661192698131767}
   - component: {fileID: 352839035061062052}
+  - component: {fileID: 3789054017880779917}
   - component: {fileID: 1866204125053615698}
-  - component: {fileID: 1535759077317766027}
   - component: {fileID: 543409278674757103}
   - component: {fileID: 5084658018077062733}
   m_Layer: 0
@@ -93,27 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &799661192698131767
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796436182462941539}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4d4330b1ebf7eb347bfb88eae9efd8fe, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &2832380244043652153
 Rigidbody2D:
   serializedVersion: 4
@@ -176,6 +155,27 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0040438175, y: -0.025417615}
   m_Size: {x: 0.2125533, y: 0.269165}
   m_Direction: 0
+--- !u!95 &799661192698131767
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796436182462941539}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d4330b1ebf7eb347bfb88eae9efd8fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &352839035061062052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +188,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c83048966064f94c8662d80f53e69da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mover: {fileID: 3789054017880779917}
   _enemyPatrol: {fileID: 1866204125053615698}
+  _rotator: {fileID: 5084658018077062733}
+  _animator: {fileID: 543409278674757103}
+--- !u!114 &3789054017880779917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796436182462941539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad6aa1e2b9c5a146813118f97839e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _jumpForce: 7
 --- !u!114 &1866204125053615698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,22 +218,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e1c589995105e40a1ec507ab11288d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: []
-  _mover: {fileID: 1535759077317766027}
-  _flip: {fileID: 5084658018077062733}
---- !u!114 &1535759077317766027
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796436182462941539}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1d48ab9ec5dc2041a9e449dfc768888, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 4
+  _points:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &543409278674757103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,7 +234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 799661192698131767}
-  _patrol: {fileID: 1866204125053615698}
 --- !u!114 &5084658018077062733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,10 +243,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 796436182462941539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6590be404dd602a4499751297a2d4942, type: 3}
+  m_Script: {fileID: 11500000, guid: db2d121630a54bc48817566ef196c740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 311325539507535573}
 --- !u!1 &1073974630720929278
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +287,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1073974630720929278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a11b1db3625527049a2a31c202a602e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fc4b6e78c305134387fc89432f7b64a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _ground:

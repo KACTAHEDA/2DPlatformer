@@ -1,20 +1,21 @@
 using UnityEngine;
+using System;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
-    [SerializeField] CoinColector _coinColector;
-    [SerializeField] CompleteLevel _completeLevel;
+    public event Action<Coin> OnCoin;
+    public event Action OnDoor;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out Coin coin))
         {
-            _coinColector.TryCollect(coin);
+            OnCoin?.Invoke(coin);
         }
 
         if(collision.TryGetComponent(out Door door))
         {
-            _completeLevel.LevelPased();
+            OnDoor?.Invoke();
         }
     }
 }
