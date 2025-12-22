@@ -221,6 +221,8 @@ MonoBehaviour:
   _points:
   - {fileID: 0}
   - {fileID: 0}
+  _minDistanceToPoint: 0.1
+  _resumeDistance: 0.15
 --- !u!114 &543409278674757103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +257,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1863082690545580387}
-  - component: {fileID: 902026303054570589}
   m_Layer: 0
   m_Name: GroundCheckPoint
   m_TagString: Untagged
@@ -278,19 +279,3 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1527890533679856774}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &902026303054570589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073974630720929278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fc4b6e78c305134387fc89432f7b64a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _ground:
-    serializedVersion: 2
-    m_Bits: 8
-  _radius: 0.2

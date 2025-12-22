@@ -6,17 +6,26 @@ using TMPro;
 public class Finisher : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _levelCompleteText;
+    [SerializeField] private PlayerInput _playerInput;
+    [SerializeField] private CollisionHandler _collisionHandler;
 
     private bool _isPased = false;
 
-    private void Update()
+    private void OnEnable()
     {
-        TryLoadScene();
+        _collisionHandler.OnDoor += LevelPased;
+        _playerInput.KeyPressed += TryLoadScene;
+    }
+
+    private void OnDisable()
+    {
+        _collisionHandler.OnDoor -= LevelPased;
+        _playerInput.KeyPressed -= TryLoadScene;
     }
 
     private void TryLoadScene()
     {
-        if (_isPased && Input.anyKeyDown)
+        if (_isPased)
         {
             Time.timeScale = 1;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

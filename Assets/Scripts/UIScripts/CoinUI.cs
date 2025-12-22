@@ -6,9 +6,14 @@ public class CoinUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _coinText;
     [SerializeField] private Wallet _wallet;
 
-    private void Update()
+    private void OnEnable()
     {
-        DisplayCoinsCount();
+        _wallet.ValueChanged += DisplayCoinsCount;
+    }
+
+    private void OnDisable()
+    {
+        _wallet.ValueChanged -= DisplayCoinsCount;
     }
 
     private void DisplayCoinsCount()
