@@ -8,10 +8,10 @@ public class CoinSpawner : MonoBehaviour
 
     private void Awake()
     {
-        SpawnCoins();  
+        SpawnItems();  
     }
 
-    private void SpawnCoins()
+    private void SpawnItems()
     {
         foreach (var point in _spawnPoints)
         {
