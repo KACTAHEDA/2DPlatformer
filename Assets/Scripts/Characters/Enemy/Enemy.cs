@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour, IDamageble
     [SerializeField] private EnemyVision _vision;
     [SerializeField] private Attacker _attacker;
     [SerializeField] private Health _health;
-    [SerializeField] private CollisionHandler _collisionHandler;
-    [SerializeField] private float _attackDistance = 1.1f;
     [SerializeField] private float _stopDistance = 1.2f;
 
     private ITarget _targetPlayer;
@@ -106,18 +104,14 @@ public class Enemy : MonoBehaviour, IDamageble
     private void TryAttack()
     {
         if (_targetPlayer == null)
-            return;
+            return;     
+      
+        _attacker.TryAttack(out bool isAttack);
 
-        if (_attacker.CanAttack == false)
-            return;
-
-        float distance = Mathf.Abs(_targetPlayer.TargetTransform.position.x - transform.position.x);
-
-        if (distance > _attackDistance)
-            return;
-
-        _animator.PlayAttack();
-        _attacker.TryAttack();
+        if(isAttack == true)
+        {
+            _animator.PlayAttack();
+        }
 
     }
 

@@ -18,10 +18,12 @@ public class Attacker : MonoBehaviour
         _owner = GetComponentInParent<IDamageble>();
     }
 
-    public void TryAttack()
+    public void TryAttack(out bool isAttack)
     {
+        isAttack = false;
+
         if (!CanAttack)
-            return;
+            return ;
 
         _lastAttackTime = Time.time;
 
@@ -37,6 +39,7 @@ public class Attacker : MonoBehaviour
                 }
 
                 damageble.TakeDamage(_damage);
+                isAttack = true;
                 break;
             }
         }

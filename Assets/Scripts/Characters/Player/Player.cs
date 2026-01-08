@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour , IDamageble , ITarget
+public class Player : MonoBehaviour, IDamageble, ITarget
 {
     [SerializeField] private PlayerInput _input;
     [SerializeField] private Mover _mover;
@@ -42,8 +42,8 @@ public class Player : MonoBehaviour , IDamageble , ITarget
         if (_attacker.CanAttack == false)
             return;
 
+        _attacker.TryAttack(out bool isAttack);
         _animator.PlayAttack();
-        _attacker.TryAttack();
     }
 
     private void CollectCoin(Coin coin)
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour , IDamageble , ITarget
     }
 
     private void CollectHeal(Heal heal)
-    {        
+    {
         heal.Collect();
         _health.Heal(heal.HealValue);
     }
