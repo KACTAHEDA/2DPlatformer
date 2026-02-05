@@ -1,9 +1,12 @@
 using UnityEngine;
+using System;
 
 public class SpriteRotator : MonoBehaviour
 {
     private Quaternion _lookAtRight;
     private Quaternion _lookAtLeft;
+
+    public event Action Flip;
 
     private void Awake()
     {
@@ -22,5 +25,7 @@ public class SpriteRotator : MonoBehaviour
             transform.localRotation = _lookAtRight;
         else if (direction < 0 && transform.localRotation != _lookAtLeft)
             transform.localRotation = _lookAtLeft;
+        
+            Flip?.Invoke();
     }
 }

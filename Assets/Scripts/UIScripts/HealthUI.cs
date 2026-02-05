@@ -1,19 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class HealthUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _healthText;
-    [SerializeField] private Health _health;
+    [SerializeField] private Slider _slider;
 
-    private void Start()
-    {
-        DisplayHealth();
-    }
+    private Health _health;
 
-    private void OnEnable()
+    public void Init(Health health )
     {
+        _health = health;
         _health.HealthChanged += DisplayHealth;
+        DisplayHealth();
     }
 
     private void OnDisable()
@@ -23,6 +23,10 @@ public class HealthUI : MonoBehaviour
 
     private void DisplayHealth()
     {
-        _healthText.text = _health.CurentHealth.ToString();
+        if (_health == null)
+            return;
+
+        _healthText.text = $"{_health.CurentHealth} / {_health.MaxHealth}";
+        _slider.value = (float)_health.CurentHealth / _health.MaxHealth;
     }
 }
