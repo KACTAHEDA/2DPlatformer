@@ -4,13 +4,12 @@ public class Player : MonoBehaviour, IDamageble, ITarget
 {
     [SerializeField] private PlayerInput _input;
     [SerializeField] private Mover _mover;
-    [SerializeField] private SpriteRotator _rotator;
     [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private Wallet _wallet;
-    [SerializeField] private PlayerAnimator _animator;
     [SerializeField] private Attacker _attacker;
     [SerializeField] private Health _health;
     [SerializeField] private CollisionHandler _collisionHandler;
+    [SerializeField] private CharacterVisual _visual;
 
     public Transform TargetTransform => transform;
 
@@ -43,7 +42,9 @@ public class Player : MonoBehaviour, IDamageble, ITarget
             return;
 
         _attacker.TryAttack(out bool isAttack);
-        _animator.PlayAttack();
+
+        if (isAttack)
+            _visual.PlayAttack();
     }
 
     private void CollectCoin(Coin coin)
@@ -62,18 +63,19 @@ public class Player : MonoBehaviour, IDamageble, ITarget
     {
         float direction = _input.MoveInput;
         float minToStop = 0.01f;
+        bool isGrounded = _groundChecker.IsGrounded;
+        bool isMoveing = _mover.IsMoveing;
 
         if (Mathf.Abs(direction) > minToStop)
         {
             _mover.Move(direction);
-            _rotator.Rotate(direction);
         }
         else
         {
             _mover.Stop();
         }
 
-        _animator.UpdateState(_groundChecker.IsGrounded, Mathf.Abs(direction));
+        _visual.UpdateVisual(isGrounded, direction, isMoveing);
     }
 
     private void JumpPressed()

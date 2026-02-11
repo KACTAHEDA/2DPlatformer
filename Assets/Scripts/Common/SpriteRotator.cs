@@ -6,7 +6,7 @@ public class SpriteRotator : MonoBehaviour
     private Quaternion _lookAtRight;
     private Quaternion _lookAtLeft;
 
-    public event Action Flip;
+    public event Action Flipped;
 
     private void Awake()
     {
@@ -22,10 +22,14 @@ public class SpriteRotator : MonoBehaviour
             return;
 
         if (direction > 0 && transform.localRotation != _lookAtRight)
+        {
             transform.localRotation = _lookAtRight;
+            Flipped?.Invoke();
+        }
         else if (direction < 0 && transform.localRotation != _lookAtLeft)
+        {
             transform.localRotation = _lookAtLeft;
-        
-            Flip?.Invoke();
+            Flipped?.Invoke();
+        }
     }
 }

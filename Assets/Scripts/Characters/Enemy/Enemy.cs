@@ -3,13 +3,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IDamageble
 {
     [SerializeField] private Mover _mover;
+    [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private EnemyPatrol _enemyPatrol;
-    [SerializeField] private SpriteRotator _rotator;
-    [SerializeField] private EnemyAnimator _animator;
     [SerializeField] private EnemyVision _vision;
     [SerializeField] private Attacker _attacker;
     [SerializeField] private Health _health;
     [SerializeField] private float _stopDistance = 1.2f;
+    [SerializeField] private CharacterVisual _visual;
 
     private ITarget _targetPlayer;
 
@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour, IDamageble
         if (_enemyPatrol.IsTargetReached(transform.position))
         {
             _mover.Stop();
-            _animator.PlayMovement(false);
             _enemyPatrol.SelectNextPoint();
             return;
         }
@@ -81,9 +80,10 @@ public class Enemy : MonoBehaviour, IDamageble
     private void UpdateVisual()
     {
         float direction = _mover.Direction;
+        bool isGrounded = _groundChecker.IsGrounded;
+        bool isMoveing = _mover.IsMoveing;
 
-        _rotator.Rotate(direction);
-        _animator.PlayMovement(_mover.IsMoveing);
+        _visual.UpdateVisual(isGrounded, direction, isMoveing);
     }
 
     private void SetTarget(ITarget target)
@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour, IDamageble
 
         if(isAttack == true)
         {
-            _animator.PlayAttack();
+            _visual.PlayAttack();
         }
 
     }
