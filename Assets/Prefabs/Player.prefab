@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f46dd3b22eb47a4c909596ea41e1ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  _maxHealth: 100
 --- !u!114 &4797201957669841439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,6 +408,7 @@ MonoBehaviour:
   _horizontal: Horizontal
   _jumpKey: 32
   _attackKey: 324
+  _skill1: 101
   _deadZone: 0.1
 --- !u!114 &4819365798692997728
 MonoBehaviour:
@@ -422,7 +423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPoint: {fileID: 973291860914255308}
-  _damage: 1
+  _damage: 5
   _cooldown: 0.5
   _attackRange: 0.5
   _damageableLayer:
@@ -582,11 +583,11 @@ PrefabInstance:
       objectReference: {fileID: 1382408900873154852}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_fontSize
-      value: 35.7
+      value: 44.85
       objectReference: {fileID: 0}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_margin.w
-      value: 10.756764
+      value: 5.832005
       objectReference: {fileID: 0}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_margin.x
@@ -594,15 +595,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_margin.y
-      value: -0.5792942
+      value: -5.881071
       objectReference: {fileID: 0}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_fontStyle
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8034334275831215174, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}
+      propertyPath: m_enableVertexGradient
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7313330570112611607, guid: 8addde728888e494da6f1eb56eaa213d, type: 3}

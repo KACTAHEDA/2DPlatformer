@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private string _horizontal = "Horizontal";
     [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
     [SerializeField] private KeyCode _attackKey = KeyCode.Mouse1;
+    [SerializeField] private KeyCode _skill1 = KeyCode.E;
     [SerializeField] private float _deadZone = 0.1f;
 
     private float _currentInput;
@@ -15,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     public event Action Jump;
     public event Action Attack;
     public event Action KeyPressed;
+    public event Action SkillOnePressed;
 
     private void Update()
     {
@@ -22,6 +24,7 @@ public class PlayerInput : MonoBehaviour
         ReadJump();
         ReadAnyKey();
         ReadAttack();
+        ReadSkillOne();
     }
 
     private void ReadMovement()
@@ -51,6 +54,14 @@ public class PlayerInput : MonoBehaviour
         if (Input.anyKeyDown)
         {
             KeyPressed?.Invoke();
+        }
+    }
+
+    private void ReadSkillOne()
+    {
+        if (Input.GetKeyDown(_skill1))
+        {
+            SkillOnePressed?.Invoke();
         }
     }
 }
