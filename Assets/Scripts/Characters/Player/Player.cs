@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IDamageble, ITarget
     [SerializeField] private Health _health;
     [SerializeField] private CollisionHandler _collisionHandler;
     [SerializeField] private CharacterVisual _visual;
+    [SerializeField] private SkillsSystem _skillsSystem;
 
     public Transform TargetTransform => transform;
 
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour, IDamageble, ITarget
         _collisionHandler.OnCoin += CollectCoin;
         _collisionHandler.OnHeal += CollectHeal;
         _health.Died += Die;
+        _input.SkillOnePressed += UseSkillOne;
     }
 
     private void OnDisable()
@@ -29,11 +31,17 @@ public class Player : MonoBehaviour, IDamageble, ITarget
         _collisionHandler.OnCoin -= CollectCoin;
         _collisionHandler.OnHeal -= CollectHeal;
         _health.Died -= Die;
+        _input.SkillOnePressed -= UseSkillOne;
     }
 
     private void Update()
     {
         SetMovement();
+    }
+
+    private void UseSkillOne()
+    {
+        _skillsSystem.UseSkillOne();
     }
 
     private void Attack()
@@ -91,8 +99,11 @@ public class Player : MonoBehaviour, IDamageble, ITarget
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int damage)
+    public float TakeDamage(float damage)
     {
-        _health.TakeDamage(damage);
+        float applyedDamage = Mathf.Min(_health.CurentHealth, damage);
+        _health.TakeDamage(applyedDamage);
+
+        return applyedDamage;
     }
 }

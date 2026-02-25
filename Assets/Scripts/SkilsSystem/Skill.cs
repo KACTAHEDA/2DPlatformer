@@ -1,68 +1,63 @@
-using System.Collections;
+using System;
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour, ISkill
+public abstract class Skill : MonoBehaviour
 {
     [Header("Timings")]
     [SerializeField] private float _duration = 4f;
     [SerializeField] private float _cooldown = 6f;
-    [SerializeField] private float _tickInterval = 0.5f;
 
     [Header("Timers")]
-    [SerializeField] private DurationTimer _durationTimer;
-    [SerializeField] private CooldownTimer _cooldownTimer;
+    [SerializeField] private Timer _durationTimer;
+    [SerializeField] private Timer _cooldownTimer;
 
-    private Coroutine _tickCoroutine;
+    public event Action Activated;
+    public event Action Deactivated;
+    public event Action<float> DurationProgress;
+    public event Action<float> CooldownProgress;
 
-    public DurationTimer DurationTimer => _durationTimer;
-    public CooldownTimer CooldownTimer => _cooldownTimer;
+    public Timer DurationTimer => _durationTimer;
+    public Timer CooldownTimer => _cooldownTimer;
 
-    public bool IsActive { get; private set; }
+    public bool IsReady => !_cooldownTimer.IsRuning;
+    public float DurationElapsed => _durationTimer.ElapsedTime;
 
-    protected virtual void OnEnable()
+    private void OnEnable()
     {
-        _durationTimer.Completed += OnDurationFinished;
+        _durationTimer.ProgressChanged += OnDurationProgress;
+        _durationTimer.Completed += OnDurationCompleted;
+        _cooldownTimer.ProgressChanged += OnCooldownProgress;
     }
 
-    protected virtual void OnDisable()
+    private void OnDisable()
     {
-        _durationTimer.Completed -= OnDurationFinished;
+        _durationTimer.ProgressChanged -= OnDurationProgress;
+        _durationTimer.Completed -= OnDurationCompleted;
+        _cooldownTimer.ProgressChanged -= OnCooldownProgress;
     }
 
     public void TryActivate()
     {
-        if (IsActive || _cooldownTimer.IsReady == false)
+        if (IsReady == false)
             return;
 
-        IsActive = true;
-        OnActivated();
         _durationTimer.StartTimer(_duration);
-        _tickCoroutine = StartCoroutine(TickCoroutine());
-    }
-
-    private IEnumerator TickCoroutine()
-    {
-        WaitForSeconds wait = new WaitForSeconds(_tickInterval);
-
-        while (IsActive)
-        {
-            OnTick();
-            yield return wait;
-        }
-    }
-
-    private void OnDurationFinished()
-    {
-        IsActive = false;
-
-        if (_tickCoroutine != null)
-            StopCoroutine(_tickCoroutine);
-
-        OnDeactivated();
         _cooldownTimer.StartTimer(_cooldown);
+
+        OnActivated();
+        Activated?.Invoke();
     }
 
-    protected abstract void OnActivated();
-    protected abstract void OnDeactivated();
-    protected abstract void OnTick();
+    private void OnDurationCompleted()
+    {
+        OnDeactivated();
+        Deactivated?.Invoke();
+    }
+
+    private void OnDurationProgress(float progress) => DurationProgress?.Invoke(progress);
+
+    private void OnCooldownProgress(float progress) => CooldownProgress?.Invoke(progress); 
+
+    protected virtual void OnActivated() { }
+    protected virtual void OnDeactivated() { }
 }

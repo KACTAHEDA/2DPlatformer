@@ -17,6 +17,6 @@ public class HealthUIText : HealthUIBase
 
     private void DisplayText()
     {
-        _healthText.text = $"{Health.CurentHealth} / {Health.MaxHealth}";
+        _healthText.text = $"{Mathf.RoundToInt(Health.CurentHealth)} / {Mathf.RoundToInt(Health.MaxHealth)}";
     }
 }

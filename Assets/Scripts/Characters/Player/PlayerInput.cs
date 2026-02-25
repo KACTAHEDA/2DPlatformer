@@ -11,12 +11,12 @@ public class PlayerInput : MonoBehaviour
 
     private float _currentInput;
 
-    public float MoveInput { get; private set; }
-
     public event Action Jump;
     public event Action Attack;
     public event Action KeyPressed;
     public event Action SkillOnePressed;
+
+    public float MoveInput { get; private set; }
 
     private void Update()
     {
@@ -61,7 +61,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyDown(_skill1))
         {
-            SkillOnePressed?.Invoke();
+            SkillOnePressed?.Invoke();           
         }
     }
 }

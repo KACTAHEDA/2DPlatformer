@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPoint: {fileID: 4265063142484856096}
-  _damage: 2
+  _damage: 10
   _cooldown: 0.5
   _attackRange: 0.5
   _damageableLayer:

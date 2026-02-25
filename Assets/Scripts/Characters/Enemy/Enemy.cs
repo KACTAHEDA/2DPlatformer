@@ -115,8 +115,11 @@ public class Enemy : MonoBehaviour, IDamageble
 
     }
 
-    public void TakeDamage(int damage)
+    public float TakeDamage(float damage)
     {
-        _health.TakeDamage(damage);
+        float applyedDamage = Mathf.Min(_health.CurentHealth, damage);
+        _health.TakeDamage(applyedDamage);
+
+        return applyedDamage;
     }
 }

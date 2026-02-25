@@ -3,7 +3,7 @@ using UnityEngine;
 public class Attacker : MonoBehaviour
 {
     [SerializeField] private Transform _attackPoint;
-    [SerializeField] private int _damage = 1;
+    [SerializeField] private float _damage = 1f;
     [SerializeField] private float _cooldown = 0.5f;
     [SerializeField] private float _attackRange = 0.5f;
     [SerializeField] private LayerMask _damageableLayer;

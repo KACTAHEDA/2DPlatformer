@@ -368,6 +368,7 @@ MonoBehaviour:
   _health: {fileID: 5048718322570827195}
   _collisionHandler: {fileID: 4797201957669841439}
   _visual: {fileID: 3411146346490621684}
+  _skillsSystem: {fileID: 0}
 --- !u!114 &5048718322570827195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attackPoint: {fileID: 973291860914255308}
-  _damage: 5
+  _damage: 20
   _cooldown: 0.5
   _attackRange: 0.5
   _damageableLayer:
